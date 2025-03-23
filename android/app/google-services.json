@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "52183883036",
+    "project_id": "kisiselfinansapp",
+    "storage_bucket": "kisiselfinansapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:52183883036:android:77c44bbe233e6b39c9eed9",
+        "android_client_info": {
+          "package_name": "com.example.kisiselfinansapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIIKdUqh6JHm1FVEy70xfN9iG10FoB1WQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
