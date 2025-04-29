@@ -6,6 +6,22 @@ class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   
+   // Kayıt olma işlemi
+  Future<User?> registerWithEmailAndPassword(String email, String password) async {
+    try {
+      // Firebase Auth kullanarak kullanıcı kaydı yapma
+      final UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      return userCredential.user;
+    } catch (e) {
+      print("Kayıt hatası: $e");
+      return null;
+    }
+  }
+
+  
   // Kullanıcıyı e-posta ve şifre ile giriş yaparak oturum açma fonksiyonu
   Future<User?> signInWithEmailAndPassword(String email, String password) async {
     try {
