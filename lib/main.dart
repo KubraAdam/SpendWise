@@ -7,6 +7,8 @@ import 'screens/login_screen.dart';
 import 'screens/dashboard_screen.dart';
 import 'screens/signup_screen.dart';
 import 'screens/income_expenses_screen.dart'; // 🔥 Yeni ekranı import ettik
+import 'package:kisiselfinansapp/screens/receipt_ocr_screen.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -51,6 +53,9 @@ class MyApp extends StatelessWidget {
         '/dashboard': (context) => const DashboardScreen(),
         '/signup': (context) => const SignUpScreen(),
         '/income_expenses': (context) => const IncomeExpensesScreen(), // 🔥 Yeni route ekledik
+        '/receipt_ocr': (context) => const ReceiptOCRScreen(),
+
+
       },
     );
   }
