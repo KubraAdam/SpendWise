@@ -6,6 +6,8 @@ import '../screens/login_screen.dart';
 import 'package:kisiselfinansapp/screens/receipt_ocr_screen.dart';
 
 
+
+
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
 
@@ -15,7 +17,7 @@ class DashboardScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Dashboard', style: TextStyle(color: Colors.white)),
+        title: const Text('Home', style: TextStyle(color: Colors.white)),
         backgroundColor: const Color(0xFF1C027B),
         actions: [
           IconButton(

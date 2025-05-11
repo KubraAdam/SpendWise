@@ -69,6 +69,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '52183883036',
     projectId: 'kisiselfinansapp',
     storageBucket: 'kisiselfinansapp.firebasestorage.app',
+    androidClientId: '52183883036-pmbt6de9s12tqepjgdp3kq2sqm3fqe2v.apps.googleusercontent.com',
+    iosClientId: '52183883036-li8doistnf5kkn62bkbofqdph6beja4l.apps.googleusercontent.com',
     iosBundleId: 'com.example.kisiselfinansapp',
   );
 

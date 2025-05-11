@@ -6,16 +6,21 @@ import 'package:kisiselfinansapp/theme/theme_mode_notifier.dart'; // Tema yönet
 import 'screens/login_screen.dart';
 import 'screens/dashboard_screen.dart';
 import 'screens/signup_screen.dart';
-import 'screens/income_expenses_screen.dart'; // 🔥 Yeni ekranı import ettik
-import 'package:kisiselfinansapp/screens/receipt_ocr_screen.dart';
+import 'screens/income_expenses_screen.dart';
+import 'screens/receipt_ocr_screen.dart';
+import 'screens/receipt_list_screen.dart'; // 👈 Bu satır eklendi
+import 'firebase_options.dart';
+import 'package:kisiselfinansapp/screens/budget_planning_screen.dart';
 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
     ChangeNotifierProvider(
-      create: (_) => ThemeModeNotifier(), // Tema sağlayıcı
+      create: (_) => ThemeModeNotifier(),
       child: const MyApp(),
     ),
   );
@@ -26,35 +31,41 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeNotifier = Provider.of<ThemeModeNotifier>(context); // Theme değişimi için
+    final themeNotifier = Provider.of<ThemeModeNotifier>(context);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Kişisel Finans',
-      theme: ThemeData.light(), // Açık tema
-      darkTheme: ThemeData.dark(), // Karanlık tema
-      themeMode: themeNotifier.themeMode, // Tema modunu kullan
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
+      themeMode: themeNotifier.themeMode,
+
+      // 
       home: StreamBuilder<User?>(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Scaffold(
-              body: Center(child: CircularProgressIndicator()),
-            );
-          } else if (snapshot.hasData) {
-            return const DashboardScreen(); // Kullanıcı giriş yaptıysa
-          } else {
-            return const LoginScreen(); // Giriş yapmadıysa
-          }
-        },
-      ),
+  stream: FirebaseAuth.instance.authStateChanges(),
+  builder: (context, snapshot) {
+    if (snapshot.connectionState == ConnectionState.waiting) {
+      return const Scaffold(
+        body: Center(child: CircularProgressIndicator()),
+      );
+    } else if (snapshot.hasData) {
+      return const DashboardScreen(); // ✅ Giriş yaptıysa burası
+    } else {
+      return const LoginScreen(); // ❌ Giriş yapmadıysa burası
+    }
+  },
+),
+
+
+      // 🧭 Route'lar aynı kaldı
       routes: {
         '/login': (context) => const LoginScreen(),
         '/dashboard': (context) => const DashboardScreen(),
         '/signup': (context) => const SignUpScreen(),
-        '/income_expenses': (context) => const IncomeExpensesScreen(), // 🔥 Yeni route ekledik
+        '/income_expenses': (context) => const IncomeExpensesScreen(),
         '/receipt_ocr': (context) => const ReceiptOCRScreen(),
-
+        '/receipt_list': (context) => const ReceiptListScreen(),
+        '/budget_planning': (context) => const BudgetPlanningScreen(),
 
       },
     );
