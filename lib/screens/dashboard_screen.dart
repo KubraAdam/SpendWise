@@ -5,9 +5,6 @@ import 'package:kisiselfinansapp/theme/theme_mode_notifier.dart';
 import '../screens/login_screen.dart';
 import 'package:kisiselfinansapp/screens/receipt_ocr_screen.dart';
 
-
-
-
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
 
@@ -121,25 +118,29 @@ class DashboardScreen extends StatelessWidget {
     );
   }
 
- Widget _dashboardButton(BuildContext context, String title, String iconPath, String routeName) {
-  return Card(
-    margin: const EdgeInsets.symmetric(vertical: 8),
-    child: ListTile(
-      leading: Image.asset(iconPath, width: 40, height: 40),
-      title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
-      trailing: const Icon(Icons.arrow_forward_ios),
-      onTap: () {
-        if (routeName == '/receipt_ocr') {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (_) => const ReceiptOCRScreen()),
-          );
-        } else {
-          Navigator.pushNamed(context, routeName);
-        }
-      },
-    ),
-  );
-}
+  Widget _dashboardButton(BuildContext context, String title, String iconPath, String routeName) {
+    return Card(
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      child: ListTile(
+        leading: Image.asset(iconPath, width: 40, height: 40),
+        title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+        trailing: const Icon(Icons.arrow_forward_ios),
+        onTap: () {
+          final userId = FirebaseAuth.instance.currentUser?.uid;
+          print("Navigating to $routeName with userId: $userId");
 
-}
+          if (routeName == '/receipt_ocr') {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const ReceiptOCRScreen()),
+            );
+          } else if ((routeName == '/subscription_tracking' || routeName == '/financial_goals' || routeName == '/data_visualization') && userId != null) {
+            Navigator.pushNamed(context, routeName, arguments: userId);
+          } else {
+            Navigator.pushNamed(context, routeName);
+          }
+        },
+      ),
+    );
+  }
+} 
