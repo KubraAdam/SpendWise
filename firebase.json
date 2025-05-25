@@ -1,1 +1,36 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"kisiselfinansapp","appId":"1:52183883036:android:77c44bbe233e6b39c9eed9","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"kisiselfinansapp","configurations":{"android":"1:52183883036:android:77c44bbe233e6b39c9eed9","ios":"1:52183883036:ios:176ec0387416ab2cc9eed9","web":"1:52183883036:web:8f192f433e06e51cc9eed9"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "kisiselfinansapp",
+          "appId": "1:52183883036:android:77c44bbe233e6b39c9eed9",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "kisiselfinansapp",
+          "configurations": {
+            "android": "1:52183883036:android:77c44bbe233e6b39c9eed9",
+            "ios": "1:52183883036:ios:176ec0387416ab2cc9eed9",
+            "web": "1:52183883036:web:8f192f433e06e51cc9eed9"
+          }
+        }
+      }
+    }
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ]
+    }
+  ]
+}

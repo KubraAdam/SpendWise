@@ -234,7 +234,7 @@ class _IncomeExpensesScreenState extends State<IncomeExpensesScreen> {
     );
   }
 
-  void _buildAddTransactionDialog() {
+  Future<void> _buildAddTransactionDialog() async {
     if (_amountController.text.isEmpty || selectedCategory == null) return;
 
     final newTransaction = {
@@ -256,18 +256,31 @@ class _IncomeExpensesScreenState extends State<IncomeExpensesScreen> {
     });
 
     final user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      FirebaseFirestore.instance.collection('transactions').add({
-        'uid': user.uid,
-        'amount': newTransaction['amount'],
-        'category': (newTransaction['category'] as Category).name,
-        'categoryIcon': (newTransaction['category'] as Category).icon.codePoint,
-        'categoryColor': (newTransaction['category'] as Category).color.value,
-        'month': newTransaction['month'],
-        'date': newTransaction['date'],
-        'type': newTransaction['type'],
-      });
-    }
+if (user != null) {
+  try {
+    await FirebaseFirestore.instance
+        .collection('transactions')
+        .doc(user.uid)
+        .collection('transactions')
+        .add({
+          'uid': user.uid,
+          'amount': newTransaction['amount'],
+          'category': (newTransaction['category'] as Category).name,
+          'categoryIcon': (newTransaction['category'] as Category).icon.codePoint,
+          'categoryColor': (newTransaction['category'] as Category).color.value,
+          'month': newTransaction['month'],
+          'date': newTransaction['date'],
+          'type': newTransaction['type'],
+        });
+
+    print("✅ Kayıt Firestore'a başarıyla eklendi.");
+  } catch (e) {
+    print("❌ Firestore kayıt hatası: $e");
+  }
+}
+
+ 
+
   }
 
   List<Map<String, dynamic>> _filterAndSortTransactions(List<Map<String, dynamic>> transactions) {
